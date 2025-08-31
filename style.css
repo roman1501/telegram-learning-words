@@ -1,3 +1,103 @@
-h1{
-    color: green;
+:root {
+  --bg:#320D6D;          /* фоновий фіолет */
+  --card:#3E1580;        /* темніші картки */
+  --border:#53328A;      /* бордери */
+  --text:#FFF0C8;        /* основний текст = кремовий */
+  --muted:#d9cbb0;       /* приглушений крем */
+  --accent:#FFF0C8;      /* акцент */
+  --ok:#22c55e;
+  --mid:#7a6bbf;
+  --bad:#ef4444;
 }
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,ui-sans-serif
+}
+.top{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  padding:10px
+}
+.pill{
+  padding:6px 12px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:#402080;
+  font-size:12px;
+  color:var(--muted)
+}
+.container{max-width:960px;margin:0 auto;padding:12px}
+.card{
+  background:linear-gradient(180deg,var(--card),#28095a);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  margin:12px 0;
+  box-shadow:0 8px 20px rgba(0,0,0,.35)
+}
+h1{font-size:28px;margin:8px 0 6px;color:var(--accent)}
+h2{margin:6px 0 10px;color:var(--accent)}
+.muted{color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{
+  flex:1;min-width:120px;
+  border:none;
+  border-radius:14px;
+  padding:12px 10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .06s ease;
+  background:#53328A;
+  color:var(--text)
+}
+.btn:active{transform:scale(.97)}
+.btn.primary{
+  background:linear-gradient(90deg,#8065e0,#a58cf7);
+  color:#fff;
+}
+.btn.ok{background:linear-gradient(90deg,#1f8a4e,#22c55e);color:#fff}
+.btn.mid{background:#6e62a6;color:#fff}
+.btn.bad{background:linear-gradient(90deg,#ef4444,#c1121f);color:#fff}
+.input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#291050;
+  color:#fff;
+  margin-top:8px
+}
+.list{display:grid;gap:8px;margin-top:10px}
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#3b1a74;
+}
+.item .title{font-weight:800;color:var(--accent)}
+.hint{color:var(--muted);font-size:12px;margin-top:6px}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  background:#291050;
+  color:#FFF0C8;
+  border:1px solid #53328A;
+  border-radius:12px;
+  padding:10px 14px;
+  max-width:92vw;
+  z-index:9999;
+  box-shadow:0 8px 24px rgba(0,0,0,.4)
+}
+.hidden{display:none}
