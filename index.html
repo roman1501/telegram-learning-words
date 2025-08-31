@@ -4,43 +4,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Learning English Words</title>
-
-  <!-- СТИЛІ -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Telegram WebApp (опціонально, щоб працювало і в браузері без Telegram) -->
+  <link rel="stylesheet" href="./style.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <!-- Supabase JS v2 -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <header class="top">
     <div class="pill" id="userPill">—</div>
     <div class="pill" id="duePill">Черга: 0</div>
-    <div class="pill">Ціль/день: 10</div>
+    <div class="pill" id="goalPill">Ціль/день: 10</div>
+    <label class="theme">
+      <input type="checkbox" id="themeToggle">
+      <span>🌙/🌞</span>
+    </label>
   </header>
 
   <main class="container">
-    <!-- КАРТКА СЕСІЇ -->
+    <!-- Навігація режимів -->
+    <nav class="modes">
+      <button class="tab active" data-mode="flash">Flashcard</button>
+      <button class="tab" data-mode="typing">Typing</button>
+      <button class="tab" data-mode="mcq">Multiple-choice</button>
+    </nav>
+
+    <!-- Картка сесії -->
     <section class="card">
       <div class="muted" id="deckName">Deck</div>
       <h1 id="term">Натисни «Почати»</h1>
       <p class="muted" id="translation" style="opacity:.0"></p>
       <p class="muted" id="example" style="opacity:.0"></p>
-      <div class="row">
-        <button class="btn primary" id="btnStart">Почати/Оновити</button>
-        <button class="btn" id="btnReveal">Показати</button>
-        <button class="btn" id="btnSpeak">🔊</button>
+
+      <div id="mode-flash" class="mode-area">
+        <div class="row">
+          <button class="btn primary" id="btnStart">Почати/Оновити</button>
+          <button class="btn" id="btnReveal">Показати</button>
+          <button class="btn" id="btnSpeak">🔊</button>
+        </div>
+        <div class="row">
+          <button class="btn bad" id="btnHard">Складно</button>
+          <button class="btn mid" id="btnDoubt">Непевно</button>
+          <button class="btn ok" id="btnEasy">Легко</button>
+        </div>
       </div>
-      <div class="row">
-        <button class="btn bad" id="btnHard">Складно</button>
-        <button class="btn mid" id="btnDoubt">Непевно</button>
-        <button class="btn ok" id="btnEasy">Легко</button>
+
+      <div id="mode-typing" class="mode-area hidden">
+        <input class="input" id="typingInput" placeholder="Введи переклад…" autocomplete="off" />
+        <div class="row">
+          <button class="btn primary" id="btnCheckTyping">Перевірити</button>
+          <button class="btn" id="btnSkipTyping">Пропустити</button>
+        </div>
+        <div id="typingFeedback" class="muted" style="min-height:20px;margin-top:8px"></div>
+      </div>
+
+      <div id="mode-mcq" class="mode-area hidden">
+        <div id="mcqOptions" class="mcq"></div>
+        <div class="row">
+          <button class="btn" id="btnRefreshMCQ">Інші варіанти</button>
+        </div>
+      </div>
+
+      <div class="progress">
+        <div class="bar"><span id="barFill" style="width:0%"></span></div>
+        <div class="progress-text"><span id="progNow">0</span>/<span id="progTotal">0</span></div>
       </div>
     </section>
 
-    <!-- ДОДАТИ СЛОВО -->
+    <!-- Додати слово -->
     <section class="card">
       <h2>Додати слово</h2>
       <input class="input" id="termInput" placeholder="Слово (term)" />
@@ -53,7 +82,7 @@
       <p class="hint">Підтримується формат у чаті: <b>term — переклад ; приклад</b></p>
     </section>
 
-    <!-- СЛОВНИК -->
+    <!-- Словник -->
     <section class="card">
       <h2>Словник (останні 100)</h2>
       <input class="input" id="search" placeholder="Пошук… (слово/переклад)" />
@@ -61,10 +90,12 @@
     </section>
   </main>
 
+  <!-- Конфетті -->
+  <canvas id="fx" class="fx"></canvas>
+
   <!-- Тости -->
   <div id="toast" class="toast hidden"></div>
 
-  <!-- ЛОГІКА -->
-  <script src="index.js" defer></script>
+  <script src="./index.js" defer></script>
 </body>
 </html>
