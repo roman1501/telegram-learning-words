@@ -105,3 +105,17 @@ h2{margin:6px 0 10px;color:var(--accent)}
 .hidden{display:none}
 .fx{position:fixed;inset:0;pointer-events:none;z-index:50}
 .mode-area.hidden{display:none}
+
+/* Підсвічування збігів і прикладів */
+mark {
+  background: color-mix(in srgb, var(--ok) 30%, #0000);
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+/* Візуально показати, що Easy заблоковано після reveal */
+.btn[disabled]{
+  opacity: .6;
+  cursor: not-allowed;
+  filter: saturate(.6);
+}
